@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# -o file   redirect standard output to file
+# -n #      number of processes
+# -J name   give the job a descriptive name
+
+#BSUB -o mpi_output-%J.txt -n 40 -J  Disorder_Glass_Low
+
+# Always specify per-node memory requirements so that the scheduler doesn't
+# overload compute nodes.  ( Use top on a compute node to observe mem use )
+#BSUB -R "rusage[mem=16000]"
+
+# Make module command visible
+source ~/.bashrc
+
+# Set up env for mpb-mpi
+module purge
+module load gcc-compiler/4.4.3-v1
+module load pkgsrc/1
+
+# For using the new mpb-mpi
+module load pkgsrc-openmpi/1
+
+# For using the old mpb-mpi
+#export PATH=${PATH}:/sharedapps/CEAS/common/bin/
+
+which openmpi_wrapper mpb-mpi
+openmpi_wrapper mpb-mpi Disorder_Glass_Low.ctl

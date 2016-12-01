@@ -1,0 +1,113 @@
+Sender: LSF System <lsfadmin@compute-2-21>
+Subject: Job 18113: <Disorder_Glass_Low> Exited
+
+Job <Disorder_Glass_Low> was submitted from host <hd1> by user <karbasi2_a> in cluster <lsf>.
+Job was executed on host(s) <8*compute-2-21>, in queue <normal>, as user <karbasi2_a> in cluster <lsf>.
+                            <8*compute-5-08>
+                            <8*compute-2-10>
+                            <8*compute-1-33>
+                            <8*compute-1-31>
+</home/karbasi2_a> was used as the home directory.
+</home/karbasi2_a/Data/Salman/MPB/March27_2013_Disorder/RealGlassFiber_Low_Air_300modes> was used as the working directory.
+Started at Mon Aug  5 10:52:35 2013
+Results reported at Mon Aug  5 11:10:14 2013
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash
+
+# -o file   redirect standard output to file
+# -n #      number of processes
+# -J name   give the job a descriptive name
+
+#BSUB -o mpi_output-%J.txt -n 40 -J  Disorder_Glass_Low
+
+# Always specify per-node memory requirements so that the scheduler doesn't
+# overload compute nodes.  ( Use top on a compute node to observe mem use )
+#BSUB -R "rusage[mem=16000]"
+
+# Make module command visible
+source ~/.bashrc
+
+# Set up env for mpb-mpi
+module purge
+module load gcc-compiler/4.4.3-v1
+module load pkgsrc/1
+
+# For using the new mpb-mpi
+module load pkgsrc-openmpi/1
+
+# For using the old mpb-mpi
+#export PATH=${PATH}:/sharedapps/CEAS/common/bin/
+
+which openmpi_wrapper mpb-mpi
+openmpi_wrapper mpb-mpi Disorder_Glass_Low.ctl
+
+------------------------------------------------------------
+
+Exited with exit code 137.
+
+Resource usage summary:
+
+    CPU time   :    456.88 sec.
+    Max Memory :     23610 MB
+    Max Swap   :     48428 MB
+
+    Max Processes  :        14
+    Max Threads    :        15
+
+The output (if any) follows:
+
+/sharedapps/uwm/common/scripts/openmpi_wrapper
+/sharedapps/gcc-4.4.3/pkg-1/openmpi/bin/mpb-mpi
+init-params: initializing eigensolver data
+Computing 300 bands with 1.000000e-07 tolerance.
+Working in 2 dimensions.
+Grid size is 4590 x 4590 x 1.
+Solving for 11 bands at a time.
+Creating Maxwell data...
+Allocating fields...
+Mesh size is 3.
+Lattice vectors:
+     (255, 0, 0)
+     (0, 255, 0)
+     (0, 0, 1)
+Cell volume = 65025
+Reciprocal lattice vectors (/ 2 pi):
+     (0.00392157, -0, 0)
+     (-0, 0.00392157, -0)
+     (0, -0, 1)
+Geometric objects:
+Geometric object tree has depth 1 and 0 object nodes (vs. 0 actual objects)
+Initializing dielectric function...
+Using background dielectric from file "mpb-eps-NoCladding4590_1_45.h5"...
+    ...read 4590x4590x1 dielectric function
+1 k-points:
+     (0,0,2.2907)
+Solving for band polarization: .
+Initializing fields to random numbers...
+--------------------------------------------------------------------------
+WARNING: A process refused to die!
+
+Host: compute-2-21.hpc.local.uwm
+PID:  32381
+
+This process may still be running and/or consuming resources.
+
+--------------------------------------------------------------------------
+[compute-2-21.hpc.local.uwm:32372] 1 more process has sent help message help-odls-default.txt / odls-default:could-not-kill
+[compute-2-21.hpc.local.uwm:32372] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+[compute-2-21.hpc.local.uwm:32372] 2 more processes have sent help message help-odls-default.txt / odls-default:could-not-kill
+[compute-2-21.hpc.local.uwm:32372] 1 more process has sent help message help-odls-default.txt / odls-default:could-not-kill
+[compute-2-21.hpc.local.uwm:32372] 2 more processes have sent help message help-odls-default.txt / odls-default:could-not-kill
+[compute-2-21.hpc.local.uwm:32372] 1 more process has sent help message help-odls-default.txt / odls-default:could-not-kill
+[compute-2-21.hpc.local.uwm:32372] 1 more process has sent help message help-odls-default.txt / odls-default:could-not-kill
+[compute-2-21.hpc.local.uwm:32372] 1 more process has sent help message help-odls-default.txt / odls-default:could-not-kill
+[compute-2-21.hpc.local.uwm:32372] 1 more process has sent help message help-odls-default.txt / odls-default:could-not-kill
+[compute-2-21.hpc.local.uwm:32372] 1 more process has sent help message help-odls-default.txt / odls-default:could-not-kill
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 10891 on node compute-1-31 exited on signal 9 (Killed).
+--------------------------------------------------------------------------
+9 total processes killed (some possibly by mpirun during cleanup)
